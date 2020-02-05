@@ -30,16 +30,39 @@ def form_to_int(raw_value: str) -> bool:
     return int(raw_value)
 
 
+def get_indent_items(indent) -> list:
+    indent_items = []
+    for v in ['None', 2, 4]:
+        item = dict()
+
+        item['value'] = v
+
+        item['selected'] = ''
+        if v == indent:
+            item['selected'] = ' selected'
+
+        item['text'] = v
+        if v == 'None':
+            item['text'] = 'Compact'
+
+        indent_items.append(item)
+    return indent_items
+
+
 def get_body(method: str, form: dict) -> str:
     ctx = dict()
 
     json_text_raw = JSON_SAMPLE
-    ctx['sort_keys'] = SORT_KEYS_DEFAULT
-    ctx['indent'] = INDENT_DEFAULT
     if method == 'POST':
         json_text_raw = form['in']
-        ctx['sort_keys'] = \
-            form_to_bool(form.get('sort_keys', 'f'))
+
+    ctx['sort_keys'] = SORT_KEYS_DEFAULT
+    if method == 'POST':
+        ctx['sort_keys'] =
+                form_to_bool(form.get('sort_keys', 'f')
+
+    ctx['indent'] = INDENT_DEFAULT
+    if method == 'POST':
         ctx['indent'] = form_to_int(form['indent'])
 
     ctx['in'] = html.escape(json_text_raw)
@@ -53,22 +76,7 @@ def get_body(method: str, form: dict) -> str:
     except json.decoder.JSONDecodeError as e:
         ctx['out'] = html.escape(str(e))
 
-    indent_items = []
-    for v in ['None', 2, 4]:
-        item = dict()
-
-        item.update(value=v)
-
-        item.update(selected='')
-        if ctx.get('indent') == v:
-            item.update(selected=' selected')
-
-        item.update(text=v)
-        if v == 'None':
-            item.update(text='Compact')
-
-        indent_items.append(item)
-    ctx.update(indent_items=indent_items)
+    ctx['indent_items'] = get_indent_items(ctx['indent'])
 
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
     template = env.get_template('index.html.j2')

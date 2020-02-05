@@ -58,8 +58,8 @@ def get_body(method: str, form: dict) -> str:
 
     ctx['sort_keys'] = SORT_KEYS_DEFAULT
     if method == 'POST':
-        ctx['sort_keys'] =
-                form_to_bool(form.get('sort_keys', 'f')
+        ctx['sort_keys'] = \
+                form_to_bool(form.get('sort_keys', 'f'))
 
     ctx['indent'] = INDENT_DEFAULT
     if method == 'POST':

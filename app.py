@@ -96,4 +96,4 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action='store_true', default=False)
     args = parser.parse_args()
 
-    app.run(host=args.host, port=args.port, debug=debug)
+    app.run(host=args.host, port=args.port, debug=args.debug)

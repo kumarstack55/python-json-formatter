@@ -5,6 +5,7 @@ import flask
 import html
 import jinja2
 import json
+import argparse
 
 
 SORT_KEYS_DEFAULT = False
@@ -89,5 +90,10 @@ def index():
 
 
 if __name__ == '__main__':
-    debug = False
-    app.run(debug=debug)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--host', default='0.0.0.0')
+    parser.add_argument('--port', '-p', type=int, default=5000)
+    parser.add_argument('--debug', action='store_true', default=False)
+    args = parser.parse_args()
+
+    app.run(host=args.host, port=args.port, debug=debug)

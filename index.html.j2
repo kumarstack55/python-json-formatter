@@ -3,31 +3,25 @@
     <title>JSON Formatter</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
     <style type="text/css">
-    <!--
-    textarea.json {font-family: monospace;}
-    select.inline {display: inline;}
-    -->
+      <!--
+      textarea.json {font-family: monospace;}
+      select.inline {display: inline;}
+      -->
     </style>
   </head>
   <body>
     <h1>JSON Formatter</h1>
     <h2>Input</h2>
     <form action="/" method="post">
-      <label>
-        <input type="checkbox" name="sort_keys" value="t" {% if sort_keys %}checked="checked"{% endif %}> Sort keys
-      </label> /
-      <label>Indent:
-        <select name="indent" class="inline">
-{%- for item in indent_items %}
-          <option value="{{ item.value }}"{{ item.selected }}>{{ item.text }}</option>
-{%- endfor %}
-        </select>
-      </label>
-      <textarea name="in" cols=80 rows=10 autofocus class="json">{{ in }}</textarea>
+      <label>{{ form.enable_sort_keys }} Sort keys</label> /
+      <label>{{ form.enable_indent }} Indent</label> /
+      <label>Indent Width: {{ form.indent_width(class_='inline') }}</label> /
+      <label>{{ form.enable_json_only }} JSON only</label>
+      {{ form.input_json(class_='json', rows=10, cols=80) }}
       <input type="submit">
     </form>
     <h2>Output</h2>
-    <textarea cols=80 rows=10 class="json">{{ out }}</textarea>
+    {{ form.output_json(class_='json', rows=10, cols=80) }}
   </body>
 </html>
 {# vim:set ts=2 sw=2 sts=2 et: #}

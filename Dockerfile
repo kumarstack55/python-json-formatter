@@ -1,5 +1,5 @@
 FROM alpine:latest
-ADD . /python-json-formatter
+COPY . /python-json-formatter
 WORKDIR /python-json-formatter
 RUN set -x && apk --update-cache add python3
 RUN set -x \

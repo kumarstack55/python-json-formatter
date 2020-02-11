@@ -3,6 +3,7 @@ import argparse
 import flask
 import jinja2
 import json
+import pathlib
 import wtforms
 
 
@@ -63,7 +64,8 @@ def index():
             flask.abort(400)
         form.output_json.data = str(e)
 
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
+    script_dir = pathlib.Path(__file__).resolve().parent.parent
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(script_dir))
     template = env.get_template("index.html.j2")
     ctx = dict(form=form)
     return template.render(ctx)

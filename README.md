@@ -10,9 +10,6 @@
 git clone https://github.com/kumarstack55/python-json-formatter.git
 cd python-json-formatter
 
-sudo docker container stop python-json-formatter
-sudo docker container rm python-json-formatter
-sudo docker image rm python-json-formatter
 sudo docker build -t python-json-formatter ./
 sudo docker run --name python-json-formatter -d -p 80:80 python-json-formatter
 

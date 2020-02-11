@@ -60,7 +60,7 @@ def index():
                 mimetype="application/json; charset=utf-8")
     except json.decoder.JSONDecodeError as e:
         if form.enable_json_only.data:
-            abort(400)
+            flask.abort(400)
         form.output_json.data = str(e)
 
     env = jinja2.Environment(loader=jinja2.FileSystemLoader("."))

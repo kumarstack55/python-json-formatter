@@ -22,6 +22,7 @@ class Form(wtforms.Form):
             "enable_sort_keys", default=False)
     enable_indent = wtforms.BooleanField(
             "enable_indent", default="checked")
+    enable_compact = wtforms.BooleanField("enable_compact")
     indent_width = wtforms.SelectField(
             "indent_width", choices=[(2, "2"), (4, "4"), (8, "8")],
             default=2, coerce=int)
@@ -43,10 +44,15 @@ def index():
     if form.enable_indent.data:
         indent = form.indent_width.data
 
+    separators = None
+    if form.enable_compact.data:
+        separators = (',', ':')
+
     try:
         form.output_json.data = json.dumps(
                 json.loads(form.input_json.data),
                 sort_keys=form.enable_sort_keys.data,
+                separators=separators,
                 indent=indent)
         if form.enable_json_only.data:
             return flask.Response(

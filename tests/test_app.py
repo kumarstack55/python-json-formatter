@@ -5,13 +5,14 @@ import os
 import tempfile
 import pytest
 
-from jsonformatter import app as jfapp
+import jsonformatter as jf
 
 
 @pytest.fixture
 def client():
-    jfapp.app.config['TESTING'] = True
-    with jfapp.app.test_client() as client:
+    app = jf.create_app()
+    app.config['TESTING'] = True
+    with app.test_client() as client:
         yield client
 
 def test_index_get(client):

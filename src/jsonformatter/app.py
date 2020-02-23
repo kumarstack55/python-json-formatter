@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from flask import Flask
 import argparse
 import flask
 import jinja2
@@ -15,7 +16,7 @@ JSON_SAMPLE = '''\
 '''
 
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 
 class Form(wtforms.Form):

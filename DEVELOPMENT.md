@@ -44,7 +44,7 @@ python3 -m venv venv
 source venv/bin/activate
 
 sudo docker build -t python-json-formatter ./
-sudo docker run --name python-json-formatter -d -p 80:80 python-json-formatter
+sudo docker run --name python-json-formatter -d -p 80:5000 python-json-formatter
 
 curl http://127.0.0.1/
 ```

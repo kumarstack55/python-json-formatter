@@ -1,6 +1,6 @@
 # DEVELOPMENT
 
-## debug
+## http
 
 ```bash
 git clone https://github.com/kumarstack55/python-json-formatter.git
@@ -14,9 +14,11 @@ PYTHONPATH=./ pytest -s
 export FLASK_APP=./jsonformatter/__init__.py
 export FLASK_ENV=development
 flask run
+
+curl http://127.0.0.1:5000/
 ```
 
-## install the project
+## http + pip
 
 ```bash
 git clone https://github.com/kumarstack55/python-json-formatter.git
@@ -32,6 +34,8 @@ pytest -s
 export FLASK_APP=jsonformatter
 export FLASK_ENV=development
 flask run
+
+curl http://127.0.0.1:5000/
 ```
 
 ## docker build & run
@@ -39,9 +43,6 @@ flask run
 ```bash
 git clone https://github.com/kumarstack55/python-json-formatter.git
 cd python-json-formatter
-
-python3 -m venv venv
-source venv/bin/activate
 
 sudo docker build -t python-json-formatter ./
 sudo docker run --name python-json-formatter -d -p 80:5000 python-json-formatter

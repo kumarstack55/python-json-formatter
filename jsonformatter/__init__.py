@@ -24,7 +24,7 @@ class Form(wtforms.Form):
     enable_compact = wtforms.BooleanField("enable_compact")
     indent_width = wtforms.SelectField(
             "indent_width",
-            choices=[ (2, "2"), (4, "4"), (8, "8") ],
+            choices=[(2, "2"), (4, "4"), (8, "8")],
             default=2, coerce=int)
     enable_json_only = wtforms.BooleanField(
             "enable_json_only", default=False)
@@ -67,8 +67,8 @@ def create_app():
             form.output_json.data = str(e)
 
         templates_dir = \
-                pathlib.Path(__file__).resolve().parent \
-                / "templates"
+            pathlib.Path(__file__).resolve().parent \
+            / "templates"
         loader = jinja2.FileSystemLoader(templates_dir)
         env = jinja2.Environment(loader=loader)
         template = env.get_template("index.html.j2")
@@ -79,5 +79,10 @@ def create_app():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('--port', default=5000)
+    args = parser.parse_args()
+
     app = create_app()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=args.port)
